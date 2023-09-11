@@ -1,0 +1,31 @@
+My submission is programmed in python 3.8.10 on the drexel tux linux servers.
+
+My source code is in CG_hw3.py, but I put my code in an executable file call CG_hw3 that can be called
+as needed in the requirements.
+
+I added a lot of new features to the Clip class
+
+    lines 176 - 191 
+    world_to_viewport(polygons) -   Takes in a list of polygons and transforms their coordinates based on the defined viewport PageSize. It doesnt seem to be working as entirely intended so I made a 
+                                    hot fix that stops writing to the parity bit mapping once it exceeds the limits of the defined 501 x 501 dimensions given in the homework.
+
+    lines 193 - 194
+    _set_scan_line_edge(y) -    Takes in a y value and create an edge spanning accross the whole image to be used to check for intersections.
+
+    lines 196 - 202
+    _sort_intersections(scan_line_edge, edges, polygon) -   Takes in the current scan line edge, all the edges found within that scan line and the polygon. In
+                                                            this method I loop through all the found edges on the current scan line and sort them accordingly.
+
+    lines 204 - 218
+    _update_parity_bit(scan_fill, parity_bit) -     I take in the current parity bit mapping and the data structure responsible for the scan lines and intersections.
+                                                    I loop through all the rows in the mapping and see if that current index has any intersecting points. I iterate over
+                                                    the sets of intersections and map 1's within that current row's index that would be within that range. If there is no elements
+                                                    in the current scan line, I first make sure there isn't already filling there to overwrite and put an empty list there.
+
+    lines 221 - 234
+    scan_fill(self, polygons) -     This method is esentially the main method that calls all the helper methods. It is responsible for returning/updating the parity bit mapping for each polygon.
+
+    lines 236 - 254
+    _polygon_scan_fill(polygon) -   Here I create the data structure responsible for storing the information about which scan lines have intersections. I loop through all the possible scan lines 
+                                    within the image, within that I loop over all the possible edges for the current polygon and make the needed checks with the given y values
+                                    to see if it belongs within the data structure. 
